@@ -1,0 +1,36 @@
+<h2>Available Rooms</h2>
+<table border="1" cellpadding="5">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Room Number</th>
+      <th>Type</th>
+      <th>Price Per Night</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of rooms">
+      <td>{{ room.id }}</td>
+      <td>
+        <span *ngIf="!editRoomData || editRoomData.id !== room.id">{{ room.roomNumber }}</span>
+        <input *ngIf="editRoomData && editRoomData.id === room.id" [(ngModel)]="editRoomData.roomNumber">
+      </td>
+      <td>
+        <span *ngIf="!editRoomData || editRoomData.id !== room.id">{{ room.type }}</span>
+        <input *ngIf="editRoomData && editRoomData.id === room.id" [(ngModel)]="editRoomData.type">
+      </td>
+      <td>
+        <span *ngIf="!editRoomData || editRoomData.id !== room.id">{{ room.pricePerNight }}</span>
+        <input *ngIf="editRoomData && editRoomData.id === room.id" [(ngModel)]="editRoomData.pricePerNight" type="number">
+      </td>
+      <td>
+        <!-- Actions -->
+        <button *ngIf="!editRoomData || editRoomData.id !== room.id" (click)="startEdit(room)">Edit</button>
+        <button *ngIf="editRoomData && editRoomData.id === room.id" (click)="saveUpdate()">Save</button>
+        <button *ngIf="editRoomData && editRoomData.id === room.id" (click)="cancelEdit()">Cancel</button>
+        <button (click)="deleteRoom(room.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

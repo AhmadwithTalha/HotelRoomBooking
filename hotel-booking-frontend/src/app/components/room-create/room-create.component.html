@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+  <label>Room ID:</label>
+  <input type="number" formControlName="roomId" required>
+
+  <label>Guest Name:</label>
+  <input type="text" formControlName="guestName" required>
+
+  <label>Check-in Date:</label>
+  <input type="date" formControlName="checkInDate" required>
+
+  <label>Check-out Date:</label>
+  <input type="date" formControlName="checkOutDate" required>
+
+  <button type="button" (click)="checkAvailability()">Check Availability</button>
+  <button type="button" (click)="createReservation()">Book Room</button>
+</form>
+
+<p>{{ availabilityMessage }}</p>
+
+<div *ngIf="conflictReservation">
+  <h3>Existing Reservation Info:</h3>
+  <p>Guest: {{ conflictReservation.guestName }}</p>
+  <p>Check-in: {{ conflictReservation.checkInDate | date:'short' }}</p>
+  <p>Check-out: {{ conflictReservation.checkOutDate | date:'short' }}</p>
+</div>
